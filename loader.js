@@ -1,30 +1,20 @@
-function extractIds(entries){
-  var ids = entries.map(function callback(entry, index, array) {
-    return entry.link.split("/")[4];
-  });
-  return ids.join(";")
-}
-
-function renderFeed(rssEntries, apiQuestions, container) {
-  console.log(rssEntries);
-  console.log(apiQuestions);
-  for (var i = 0; i < rssEntries.length; i++) {
-    var entry = rssEntries[i];
+function renderFeed(apiQuestions, container) {
+  for (var i = 0; i < apiQuestions.length; i++) {
     var apiQuestion = apiQuestions[i];
     var div = document.createElement("div");
     div.className = "soQuestion";
-    var html = "<h2><img class='soAvatar' title='" + apiQuestion.owner.display_name + "' src='"+ apiQuestion.owner.profile_image +"'> ";
-    html += "<a target='_blank' href='" + entry.link + "'>" + entry.title + "</a></h2>";
-    html += "<p>" + entry.content + "</p>";
+    var html = "<h2><img class='soAvatar' title='" + apiQuestion.owner.display_name + "' src='" + apiQuestion.owner.profile_image + "'> ";
+    html += "<a target='_blank' href='" + apiQuestion.link + "'>" + apiQuestion.title + "</a></h2>";
+    html += "<p>" + apiQuestion.body + "</p>";
     html += "<div>";
     if (apiQuestion.is_answered) {
       html += "<span class='soAnswered' title='This question has an accepted answer'>Answers: " + apiQuestion.answer_count + "</span>"
     } else {
       html += "<span class='soStats'>Answers: " + apiQuestion.answer_count + "</span>"
     }
-    for (var j = 0; j < entry.categories.length; j++) {
-      var category = entry.categories[j];
-      html += "<span class='soTag'>" + category + "</span>"
+    for (var j = 0; j < apiQuestion.tags.length; j++) {
+      var tag = apiQuestion.tags[j];
+      html += "<span class='soTag'>" + tag + "</span>"
     }
     html += "</div>";
     div.innerHTML = html;
@@ -41,30 +31,23 @@ function renderFeed(rssEntries, apiQuestions, container) {
 function loadFeed(tags) {
   document.getElementById('soSettings').hidden = true;
   document.getElementById('soFeed').hidden = false;
-  google.load("feeds", "1");
-  function initialize() {
-    var feed = new google.feeds.Feed("https://stackoverflow.com/feeds/tag/" + encodeURIComponent(tags));
-    var container = document.getElementById("soFeed");
-    container.innerHTML = "Loading...";
-    feed.load(function (result) {
-      if (!result.error) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', "https://api.stackexchange.com/2.2/questions/" + extractIds(result.feed.entries) + "?order=desc&sort=activity&site=stackoverflow", true);
-        xhr.responseType = 'json';
-        xhr.onload = function() {
-          container.innerHTML = "";
-          var status = xhr.status;
-          if (status === 200) {
-            renderFeed(result.feed.entries, xhr.response.items, container)
-          } else {
-            // todo: error handling
-          }
-        };
-        xhr.send();
+  var container = document.getElementById("soFeed");
+  container.innerHTML = "<div class='soLoader'>Loading question digest...</div>";
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=" + tags + "&site=stackoverflow&filter=!bEPHq1AXuNBgLu", true);
+  xhr.responseType = 'json';
+  xhr.onload = function () {
+    var status = xhr.status;
+    if (status === 200) {
+      if (xhr.response.items === undefined || xhr.response.items.length === 0) {
+        container.innerHTML = "<div class='soLoader'>No questions found. Try to refine search query in widget settings.</div>";
       } else {
-        // todo: error handling
+        container.innerHTML = "";
+        renderFeed(xhr.response.items, container)
       }
-    });
-  }
-  google.setOnLoadCallback(initialize);
+    } else {
+      container.innerHTML = "<div class='soLoader'>Failed to load questions from Stack Overflow. Check browser console for errors.</div>";
+    }
+  };
+  xhr.send();
 }

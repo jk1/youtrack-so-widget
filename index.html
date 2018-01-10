@@ -6,13 +6,32 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/hub-dashboard-addons@latest/dashboard.css">
     <!-- Include dashboard connector from CDN -->
     <script src="https://unpkg.com/hub-dashboard-addons@latest"></script>
-    <!-- Bypass same origin policy for RSS feeds -->
-    <script src="https://rss2json.com/gfapi.js"></script>
     <!-- Syntax highlighting for code blocks -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
     <style>
         html {
             height: 100%
+        }
+
+        pre.prettyprint {
+            border: none !important;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(57, 115, 157);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h2 {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         .widgetBody {
@@ -54,14 +73,6 @@
             vertical-align: middle;
         }
 
-        h2 {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
         .soInput {
             float: right;
         }
@@ -76,24 +87,16 @@
             margin-top: 10px;
         }
 
-        pre.prettyprint {
-            border: none !important;
-        }
-
-        a {
-            text-decoration: none;
-            color: rgb(57, 115, 157);
-        }
-
-        img {
-            max-width: 100%;
+        .soLoader {
+            margin-left: 25px;
+            margin-top: 25px;
         }
     </style>
 </head>
 <body class="widgetBody">
 <div id="soSettings" hidden="true">
-    <div><input type='text' id='soTitle' class="soInput" placeholder='Widget title'></div>
-    <div><input type='text' id='soTags' class="soInput" placeholder='Stack Overflow tags, comma separated'></div>
+    <div><input type='text' id='soTitle' class="soInput" placeholder='Optional title'></div>
+    <div><input type='text' id='soTags' class="soInput" placeholder='Stack Overflow tags, semicolon separated'></div>
     <div>
         <input type='button' id='save' class="soButton" value='Save'>
         <input type='button' id='cancel' class="soButton" value='Cancel'>

@@ -1,8 +1,12 @@
 {
-  "key": "stackoverflow-widget",
+  "key": "so-widget",
   "version": "1.0.0",
   "name": "Stack Overflow Widget",
-  "description": "...",
-  "author": "...",
-  "homeUrl": "..."
+  "description": "Provides Stack Overflow questions digest by tags on YouTrack bug tracker dashboard",
+  "author": "https://github.com/jk1",
+  "homeUrl": "https://github.com/jk1/youtrack-so-widget",
+  "capabilities": {
+    "topNavigation": true,
+    "popups": true
+  }
 }

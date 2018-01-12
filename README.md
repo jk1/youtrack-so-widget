@@ -2,6 +2,8 @@
 
 Provides Stack Overflow questions digest by tags on YouTrack bug tracker dashboard.
 
+![](https://raw.githubusercontent.com/jk1/youtrack-so-widget/master/widget.png)
+
 Requires YouTrack 2017.3 or higher. 
 
 # Development

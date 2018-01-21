@@ -34,7 +34,7 @@ function loadFeed(tags) {
   var container = document.getElementById("soFeed");
   container.innerHTML = "<div class='soLoader'>Loading question digest...</div>";
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=" + tags + "&site=stackoverflow&filter=!bEPHq1AXuNBgLu", true);
+  xhr.open('GET', "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=" + encodeURIComponent(tags.split(" ").join(";")) + "&site=stackoverflow&filter=!bEPHq1AXuNBgLu", true);
   xhr.responseType = 'json';
   xhr.onload = function () {
     var status = xhr.status;

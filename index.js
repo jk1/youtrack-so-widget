@@ -6,6 +6,10 @@ function populateFeed(tags) {
   loadFeed(tags)
 }
 
+function createFeedLink(tags) {
+  return "https://stackoverflow.com/questions/tagged/" + encodeURIComponent(tags);
+}
+
 function renderSettings(dashboardAPI) {
 
   document.getElementById('soSettings').hidden = false;
@@ -19,7 +23,7 @@ function renderSettings(dashboardAPI) {
       tags: tags
     });
     dashboardAPI.exitConfigMode();
-    dashboardAPI.setTitle(title);
+    dashboardAPI.setTitle(title, createFeedLink(tags));
     populateFeed(tags)
   };
 
@@ -28,7 +32,7 @@ function renderSettings(dashboardAPI) {
     dashboardAPI.readConfig().then(function (config) {
       var title = (config && config.title) || DEFAULT_TITLE;
       var tags = (config && config.tags) || "";
-      dashboardAPI.setTitle(title);
+      dashboardAPI.setTitle(title, createFeedLink(tags));
       populateFeed(tags);
     });
   };
@@ -45,7 +49,7 @@ function drawFeedFromConfig(dashboardAPI) {
   dashboardAPI.readConfig().then(function (config) {
     var title = (config && config.title) || DEFAULT_TITLE;
     var tags = (config && config.tags) || "";
-    dashboardAPI.setTitle(title);
+    dashboardAPI.setTitle(title, createFeedLink(tags));
     populateFeed(tags);
   });
 }
@@ -58,7 +62,9 @@ Dashboard.registerWidget(function (dashboardAPI, registerWidgetAPI) {
       renderSettings(dashboardAPI);
     },
     onRefresh: function () {
+      dashboardAPI.setLoadingAnimationEnabled(true);
       drawFeedFromConfig(dashboardAPI);
+      dashboardAPI.setLoadingAnimationEnabled(false);
     }
   });
 });

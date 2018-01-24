@@ -1,7 +1,7 @@
 {
   "key": "so-widget",
   "applicationName": "Stack Overflow",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "name": "Stack Overflow Widget",
   "description": "Provides Stack Overflow questions digest by tags on YouTrack bug tracker dashboard",
   "author": "jk1",
@@ -16,5 +16,9 @@
     "Hub": ">=2017.4",
     "Upsource": ">=2017.4",
     "TeamCity": ">=2017.4"
+  },
+  "view": {
+    "defaultWidth": 3,
+    "defaultHeight": 3
   }
 }

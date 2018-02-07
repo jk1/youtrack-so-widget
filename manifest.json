@@ -11,11 +11,13 @@
     "topNavigation": true,
     "popups": true
   },
-  "services": {
+  "dependencies": {
+    "Hub": ">=2017.4"
+  },
+  "products": {
     "YouTrack": ">=2017.4",
     "Hub": ">=2017.4",
-    "Upsource": ">=2017.4",
-    "TeamCity": ">=2017.4"
+    "Upsource": ">=2017.4"
   },
   "view": {
     "defaultWidth": 3,

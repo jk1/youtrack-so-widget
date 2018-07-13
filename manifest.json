@@ -1,10 +1,9 @@
 {
   "key": "so-widget",
-  "applicationName": "Stack Overflow",
-  "version": "1.0.0",
-  "name": "Stack Overflow Widget",
-  "description": "Provides Stack Overflow questions digest by tags on YouTrack bug tracker dashboard",
-  "author": "jk1",
+  "version": "1.0.1",
+  "name": "Stack Overflow Digest",
+  "description": "Provides Stack Overflow questions digest by tags on YouTrack dashboard",
+  "author": "https://github.com/jk1",
   "homeUrl": "https://github.com/jk1/youtrack-so-widget",
   "iconUrl": "stackoverflow.ico",
   "capabilities": {

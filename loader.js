@@ -7,7 +7,7 @@ function renderFeed(apiQuestions, container) {
     html += "<a target='_blank' href='" + apiQuestion.link + "'>" + apiQuestion.title + "</a></h2>";
     html += "<p>" + apiQuestion.body + "</p>";
     html += "<div>";
-    if (apiQuestion.is_answered) {
+    if (apiQuestion.accepted_answer_id) {
       html += "<span class='soAnswered' title='This question has an accepted answer'>Answers: " + apiQuestion.answer_count + "</span>"
     } else {
       html += "<span class='soStats'>Answers: " + apiQuestion.answer_count + "</span>"
@@ -34,7 +34,7 @@ function loadFeed(tags) {
   var container = document.getElementById("soFeed");
   container.innerHTML = "<div class='soLoader'>Loading question digest...</div>";
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=" + encodeURIComponent(tags.split(" ").join(";")) + "&site=stackoverflow&filter=!bEPHq1AXuNBgLu", true);
+  xhr.open('GET', "https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&tagged=" + encodeURIComponent(tags.split(" ").join(";")) + "&site=stackoverflow&filter=!gB56kCX)5zmmIj1A5scTu*7eVQAUCyMJw6p", true);
   xhr.responseType = 'json';
   xhr.onload = function () {
     var status = xhr.status;

@@ -1,6 +1,6 @@
 {
   "key": "so-widget",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "Stack Overflow Digest",
   "description": "Displays a digest of questions from Stack Overflow that match one or more tags.",
   "author": "https://github.com/jk1",

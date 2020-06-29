@@ -1,9 +1,9 @@
 {
   "key": "so-widget",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "Stack Overflow Digest",
   "description": "Displays a digest of questions from Stack Overflow that match one or more tags.",
-  "author": "https://github.com/jk1",
+  "author": "JetBrains",
   "homeUrl": "https://github.com/jk1/youtrack-so-widget",
   "iconUrl": "stackoverflow.ico",
   "capabilities": {
